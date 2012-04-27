@@ -25,7 +25,7 @@ public class TestClass {
     //Testing for CreateExecStatement.updateExecution()
 public static void main(String[] args) throws SQLException {
     CreateExecStatement createExec = new CreateExecStatement();
-    createExec.updateExecution();
+    createExec.updateExecution("INSERT INTO HACSDB (RFID) VALUES ('1AAF2A')");
     }
     
     

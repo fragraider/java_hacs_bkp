@@ -58,11 +58,11 @@ public class CreateExecStatement{
             }
         } 
     
-    public void updateExecution() throws SQLException   //newUser //newConfig String cmdString
+    public void updateExecution(String cmdString) throws SQLException   //newUser //newConfig 
         {
         connection = DerbyConnectionFactory.createConnection();
-        preparedStatement = connection.prepareStatement("INSERT INTO HACSDB (RFID) VALUES ('1AAF28')"); 
-        preparedStatement.executeQuery();
+        preparedStatement = connection.prepareStatement(cmdString); 
+        preparedStatement.executeUpdate();
         } 
     
     

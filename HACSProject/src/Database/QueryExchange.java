@@ -18,9 +18,9 @@ public class QueryExchange {
         return getConfig.getResultSet();
     }    
     
-    public void newUser() throws SQLException{          //return type? Possibly set a code variable in the main class.  String newUserNumber
+    public void newUser(String newUserNumber) throws SQLException{          //return type? Possibly set a code variable in the main class.  String newUserNumber
         CreateExecStatement newUser = new CreateExecStatement();
-        newUser.updateExecution();   //INSERT INTO HACSDB (RFID) VALUES ('1AAF25')
+        newUser.updateExecution(newUserNumber);   //INSERT INTO HACSDB (RFID) VALUES ('1AAF25')
     }
     
     
