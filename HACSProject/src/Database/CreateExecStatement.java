@@ -27,12 +27,8 @@ public class CreateExecStatement{
     public CreateExecStatement(){
         
     }
-    
-    public ResultSet getResultSet(){   //I know it is basic but I'm not sure I can pass an object var like this or if this will work. 
-        return resultSet;
-    }
-        
-    public void queryExecution(String cmdString) throws SQLException    //getConfig //getConfigAll()
+           
+    public ResultSet queryExecution(String cmdString) throws SQLException    //getConfig //getConfigAll()
         {
         connection = DerbyConnectionFactory.createConnection();
         
@@ -40,10 +36,9 @@ public class CreateExecStatement{
         //int 1stint = 5;     //For debugging only. 
         resultSet = preparedStatement.executeQuery();
         //int 2ndint = 6;    //For debugging only. 
-        metaData = resultSet.getMetaData();        
+        metaData = resultSet.getMetaData(); 
 
-        
-        //For debugging only
+        /*     //For debugging only
             int numberOfColumns = metaData.getColumnCount();
             for (int i = 1; i <= numberOfColumns; i++) {
                 System.out.printf("%-40s\t", metaData.getColumnName(i));
@@ -56,10 +51,11 @@ public class CreateExecStatement{
                 }
                 System.out.println();
             }
+            * 
+            */
+        return resultSet;
         } 
-    
-    
-    
+
     
     public void updateExecution(String cmdString) throws SQLException   //newUser //newConfig 
         {
