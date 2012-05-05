@@ -4,6 +4,7 @@
  */
 package Control;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -16,13 +17,18 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
+    private int firstRun = 1;
+
     public MainScreen() {
+
+
         initComponents();
+        //refreshRFIDList();
+//Búa til clear á þetta og method til að geta kallað þennan lista fram aftur og aftur. 
+
+refreshRFIDList();
     }
-    
-    String RFID = null;
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,20 +43,36 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        CreateUserButton = new javax.swing.JButton();
+        createUserButton = new javax.swing.JButton();
         RFIDField = new javax.swing.JTextField();
+        delUserButton = new javax.swing.JButton();
+        getConfigButton = new javax.swing.JButton();
+        updateConfigButton = new javax.swing.JButton();
+        ItemTextField1 = new javax.swing.JTextField();
+        ItemTextField2 = new javax.swing.JTextField();
+        ItemTextField3 = new javax.swing.JTextField();
+        ItemTextField5 = new javax.swing.JTextField();
+        ItemTextField4 = new javax.swing.JTextField();
+        ItemTextField6 = new javax.swing.JTextField();
+        ItemTextField8 = new javax.swing.JTextField();
+        ItemTextField7 = new javax.swing.JTextField();
+        ItemTextField9 = new javax.swing.JTextField();
+        PINTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        RFIDList = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        validRFIDCheckBox = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -92,10 +114,10 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Select RFID");
 
-        CreateUserButton.setText("Create User");
-        CreateUserButton.addActionListener(new java.awt.event.ActionListener() {
+        createUserButton.setText("Create User");
+        createUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateUserButtonActionPerformed(evt);
+                createUserButtonActionPerformed(evt);
             }
         });
 
@@ -107,153 +129,407 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Delete User");
-
-        jButton3.setText("Get Config");
-
-        jButton4.setText("Update Config");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delUserButton.setText("Delete User");
+        delUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delUserButtonActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("Item1");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        getConfigButton.setText("Get Config");
+        getConfigButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                getConfigButtonActionPerformed(evt);
             }
         });
 
-        jTextField4.setText("Item2");
-
-        jTextField5.setText("Item3");
-
-        jTextField6.setText("Item5");
-
-        jTextField7.setText("Item4");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        updateConfigButton.setText("Update Config");
+        updateConfigButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                updateConfigButtonActionPerformed(evt);
             }
         });
 
-        jTextField8.setText("Item6");
-
-        jTextField9.setText("Item8");
-
-        jTextField10.setText("Item7");
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        ItemTextField1.setText("0");
+        ItemTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                ItemTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField11.setText("Item9");
+        ItemTextField2.setText("0");
+        ItemTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemTextField2ActionPerformed(evt);
+            }
+        });
+
+        ItemTextField3.setText("0");
+
+        ItemTextField5.setText("0");
+        ItemTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemTextField5ActionPerformed(evt);
+            }
+        });
+
+        ItemTextField4.setText("0");
+        ItemTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemTextField4ActionPerformed(evt);
+            }
+        });
+
+        ItemTextField6.setText("0");
+
+        ItemTextField8.setText("0");
+        ItemTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemTextField8ActionPerformed(evt);
+            }
+        });
+
+        ItemTextField7.setText("0");
+        ItemTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemTextField7ActionPerformed(evt);
+            }
+        });
+
+        ItemTextField9.setText("0");
+
+        PINTextField.setText("0000");
+
+        jLabel2.setText("Item1");
+
+        jLabel3.setText("Item2");
+
+        jLabel4.setText("Item3");
+
+        jLabel5.setText("Item4");
+
+        jLabel6.setText("Item5");
+
+        jLabel7.setText("Item6");
+
+        jLabel8.setText("Item7");
+
+        jLabel9.setText("Item8");
+
+        jLabel10.setText("Item9");
+
+        jLabel11.setText("PIN#");
+
+        RFIDList.setToolTipText("Select RFID");
+        RFIDList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RFIDListActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Write a ");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        validRFIDCheckBox.setLabel("Valid RIFD");
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(getConfigButton)
+                    .addComponent(createUserButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(delUserButton)
+                    .addComponent(updateConfigButton))
+                .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CreateUserButton)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(RFIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(185, 185, 185)
+                                        .addComponent(RFIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(RFIDList, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(58, 58, 58)
+                                        .addComponent(jButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ItemTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PINTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(ItemTextField2)
+                                        .addComponent(ItemTextField3)
+                                        .addComponent(ItemTextField5)
+                                        .addComponent(ItemTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ItemTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ItemTextField8)
+                                        .addComponent(ItemTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ItemTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(48, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(validRFIDCheckBox)
+                        .addGap(80, 80, 80))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RFIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(RFIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(PINTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ItemTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(RFIDList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CreateUserButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ItemTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(validRFIDCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createUserButton)
+                    .addComponent(delUserButton))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(getConfigButton)
+                    .addComponent(updateConfigButton))
+                .addGap(72, 72, 72))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CreateUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserButtonActionPerformed
+    private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
         String RFID1 = RFIDField.getText();
-        this.RFID = RFID1;
         try {
             Database.QueryExchange newUserObj = new Database.QueryExchange();
             newUserObj.newUser(RFID1);
-        }   catch (SQLException ex) {Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
+            newUserObj.newConfig(RFID1, 1234, 0, 0, 0, 0, 0, 0, 0, 0, 0);   //Bullshit configuration to initialize values. 
+        } catch (SQLException ex) {
+            Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
         }
         
+        refreshRFIDList();  //Update Combolist. 
+    }//GEN-LAST:event_createUserButtonActionPerformed
 
-    
-    }//GEN-LAST:event_CreateUserButtonActionPerformed
+    private void updateConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateConfigButtonActionPerformed
+        String RFID1 = RFIDField.getText();
+        try {
+            Database.QueryExchange userUpdateObj = new Database.QueryExchange();
+            userUpdateObj.newConfig(RFID1, Integer.parseInt(PINTextField.getText()), Integer.parseInt(ItemTextField1.getText()), Integer.parseInt(ItemTextField2.getText()), Integer.parseInt(ItemTextField3.getText()), Integer.parseInt(ItemTextField4.getText()), Integer.parseInt(ItemTextField5.getText()), Integer.parseInt(ItemTextField6.getText()), Integer.parseInt(ItemTextField7.getText()), Integer.parseInt(ItemTextField8.getText()), Integer.parseInt(ItemTextField9.getText()));
+        } catch (SQLException ex) {
+            Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
+        }
+    }//GEN-LAST:event_updateConfigButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void ItemTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_ItemTextField1ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void ItemTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemTextField4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_ItemTextField4ActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void ItemTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemTextField7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_ItemTextField7ActionPerformed
 
     private void RFIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RFIDFieldActionPerformed
-        
     }//GEN-LAST:event_RFIDFieldActionPerformed
+//Must write something to start the test again after del user. 
+    private void delUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delUserButtonActionPerformed
+        String RFID1 = RFIDField.getText();
+        try {
+            Database.QueryExchange delUserObj = new Database.QueryExchange();
+            delUserObj.delUser(RFID1);
+        } catch (SQLException ex) {
+            Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
+        }
+        
+        
+        RFIDList.removeAllItems();  //Delete everything in the RFID comboBox
+        
+                try {
+            Database.QueryExchange delUserObj = new Database.QueryExchange();
+            delUserObj.delUser(RFID1);
+        } catch (SQLException ex) {
+            Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
+        }
+        
+        
+
+    }//GEN-LAST:event_delUserButtonActionPerformed
+
+    private void getConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigButtonActionPerformed
+        String RFID1 = RFIDField.getText();
+        try {
+            Database.QueryExchange userConfigObj = new Database.QueryExchange();
+            ResultSet aResultset = userConfigObj.getConfig(RFID1);
+            aResultset.next();
+            PINTextField.setText(aResultset.getObject(2).toString());
+            ItemTextField1.setText(aResultset.getObject(3).toString());
+            ItemTextField2.setText(aResultset.getObject(4).toString());
+            ItemTextField3.setText(aResultset.getObject(5).toString());
+            ItemTextField4.setText(aResultset.getObject(6).toString());
+            ItemTextField5.setText(aResultset.getObject(7).toString());
+            ItemTextField6.setText(aResultset.getObject(8).toString());
+            ItemTextField7.setText(aResultset.getObject(9).toString());
+            ItemTextField8.setText(aResultset.getObject(10).toString());
+            ItemTextField9.setText(aResultset.getObject(11).toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
+        }
+    }//GEN-LAST:event_getConfigButtonActionPerformed
+
+    private void ItemTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemTextField2ActionPerformed
+
+    private void ItemTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemTextField8ActionPerformed
+
+    private void ItemTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemTextField5ActionPerformed
+
+    private void RFIDListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RFIDListActionPerformed
+
+        //First time run should show "Select or write RFID" and then at each time 
+        //this ActionPerformed is called it should show the RFID number. 
+        RFIDField.setText(RFIDList.getSelectedItem().toString());
+        if (firstRun == 1) {
+            RFIDField.setText("Select or write RFID");
+            firstRun = 0;
+        }
+        //RFIDList.removeAll();
+        //refreshRFIDList();
+    }//GEN-LAST:event_RFIDListActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        refreshRFIDList();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        RFIDList.removeAllItems();
+        /*RFIDList.updateUI();  
+        RFIDList.repaint();  
+        RFIDList.revalidate();
+        //RFIDList.remove(1);
+        RFIDList.removeAll();
+        //RFIDList.remove
+           RFIDList.revalidate();  
+           RFIDList.updateUI();
+           RFIDList.repaint();
+           * 
+           */
+        int selectedIndex = RFIDList.
+    }//GEN-LAST:event_jButton2ActionPerformed
+    private void refreshRFIDList() {
+        //RFIDList.removeAllItems();  //Delete everything in the RFID comboBox
+        //RFIDList.repaint();
+        String RFID1 = null;  //Todo
+        
+        try {
+            Database.QueryExchange test1 = new Database.QueryExchange();
+            ResultSet resultSet = test1.getAllRFIDs();
+
+            while (resultSet.next()) {
+                RFIDList.addItem(resultSet.getObject(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RFID1);   //RFID1 as payload makes no sense. TODO. 
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -297,24 +573,40 @@ public class MainScreen extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreateUserButton;
+    private javax.swing.JTextField ItemTextField1;
+    private javax.swing.JTextField ItemTextField2;
+    private javax.swing.JTextField ItemTextField3;
+    private javax.swing.JTextField ItemTextField4;
+    private javax.swing.JTextField ItemTextField5;
+    private javax.swing.JTextField ItemTextField6;
+    private javax.swing.JTextField ItemTextField7;
+    private javax.swing.JTextField ItemTextField8;
+    private javax.swing.JTextField ItemTextField9;
+    private javax.swing.JTextField PINTextField;
     private javax.swing.JTextField RFIDField;
+    private javax.swing.JComboBox RFIDList;
+    private javax.swing.JButton createUserButton;
+    private javax.swing.JButton delUserButton;
+    private javax.swing.JButton getConfigButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton updateConfigButton;
+    private javax.swing.JCheckBox validRFIDCheckBox;
     // End of variables declaration//GEN-END:variables
 }
