@@ -41,6 +41,14 @@ public class QueryExchange {
         newConfiguration.updateExecution("UPDATE HACSDB SET PIN=" + PIN + ", ITEM1=" + Item1 +  ", ITEM2=" + Item2 + ", Item3=" + Item3 +  ", Item4=" + Item4 +  ", Item5=" + Item5 +  ", Item6=" + Item6 +  ", Item7=" + Item7 +",  Item8=" + Item8 +  ", Item9=" + Item9 + " WHERE RFID='" + RFID + "'");
     }    
     
+    public ResultSet affirmRFID(String RFID) throws SQLException{   //This is tailor made for the call from the hardware to verify RFID. 
+        CreateExecStatement affirmRFID = new CreateExecStatement();
+        ResultSet resultSet = affirmRFID.queryExecution("SELECT RFID,PIN FROM HACSDB WHERE RFID = '" + RFID + "'");
+        return resultSet;
+    }    
+    
+    
+    
   /*  public ResultSet getAll() throws SQLException{
         CreateExecStatement getConfig = new CreateExecStatement();
         getConfig.queryExecution("SELECT * FROM HACSDB");
