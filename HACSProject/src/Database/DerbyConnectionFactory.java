@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
-auth@ Eirikur Emilsson
+auth@ Eirikur Emilsson  Stolen from examples and teachers. 
  */
 public class DerbyConnectionFactory {
 
