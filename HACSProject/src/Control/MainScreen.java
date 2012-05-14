@@ -511,7 +511,7 @@ refreshRFIDList();
            RFIDList.repaint();
            * 
            */
-        int selectedIndex = RFIDList.
+        //int selectedIndex = RFIDList.
     }//GEN-LAST:event_jButton2ActionPerformed
     private void refreshRFIDList() {
         //RFIDList.removeAllItems();  //Delete everything in the RFID comboBox
