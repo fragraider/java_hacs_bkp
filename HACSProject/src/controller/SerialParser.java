@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Database;
+package controller;
 
+import Database.QueryExchange;
 import java.sql.SQLException;
 
 

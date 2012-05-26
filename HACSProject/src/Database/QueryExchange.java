@@ -49,6 +49,8 @@ public class QueryExchange {
     
     
     
+    
+    
   /*  public ResultSet getAll() throws SQLException{
         CreateExecStatement getConfig = new CreateExecStatement();
         getConfig.queryExecution("SELECT * FROM HACSDB");
