@@ -4,9 +4,6 @@
  */
 
 
-// part of 2nd commit see here. 
-
-
 package Database;
 
 import java.sql.*;
@@ -28,6 +25,9 @@ public class CreateExecStatement{
         
     }
            
+    
+    
+    
     public ResultSet queryExecution(String cmdString) throws SQLException    //getConfig //getConfigAll()
         {
         connection = DerbyConnectionFactory.createConnection();
