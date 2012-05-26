@@ -161,7 +161,7 @@ public final class HacsPacket extends Packet {
      * with the checksum value.
      */
     private void putChecksum() {
-        String format = "%0" + CHECKSUMSIZE + "d"; // with preceeding zeros
+        String format = "%0" + CHECKSUMSIZE + "d";
         String checksumString = String.format(format, getChecksum());
         byte[] checksumBytes = checksumString.getBytes();
         System.arraycopy(checksumBytes, 0, bytePacket, DATAINDEX + getDataLength(), CHECKSUMSIZE);
@@ -170,10 +170,15 @@ public final class HacsPacket extends Packet {
     /**
      * Generate the checksum value.
      */
-    @Override
-    public void generateChecksum() {
-        setChecksum(123); //TO DO
-    }
+    //@Override
+    public String makeCheckSum(String data){
+        int checksum = 0;
+        for(int i=0; i<data.length();i++)
+        checksum = (checksum ^ data.charAt(i));
+        //return ""+checksum;
+        String result = String.format("%03X",checksum);
+        return result;
+        }
 
     /**
      * Determines whether the byte array represents a complete
@@ -241,5 +246,10 @@ public final class HacsPacket extends Packet {
         int hash = 7;
         hash = 71 * hash + Arrays.hashCode(this.bytePacket);
         return hash;
+    }
+
+    @Override
+    public void generateChecksum() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

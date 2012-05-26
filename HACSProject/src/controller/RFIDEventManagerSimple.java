@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
 
+package controller;
+/** @file */
 import java.sql.SQLException;
 import java.util.TooManyListenersException;
 import java.util.logging.Level;
@@ -141,6 +142,15 @@ public class RFIDEventManagerSimple implements FrameEventListener {
         
     }
 
+    /**
+     * @brief Processes the data sent by 
+     * 
+     * Elaborate description....kjsadflkj 
+     * 
+     * @param packet
+     * @throws SQLException 
+     * 
+     */
     private void processRequest(Packet packet) throws SQLException {
         //THIS CODE IS FOR SIMPLE DEMONSTRATION ONLY.
         //IT IS DIFFICULT TO MAINTAIN AND TEST.
@@ -158,12 +168,12 @@ public class RFIDEventManagerSimple implements FrameEventListener {
         if(RFIDsent.equals(this.RFIDchecked)){
             sendRFIDResponse("13", "Accept");    //arbitrary answer. 
         }
-         
+        //else 14 deny...sdf
         }
     }
     
     private String checkRFID(String data) throws SQLException{
-        Database.SerialParser serialParser = new Database.SerialParser();
+        controller.SerialParser serialParser = new controller.SerialParser();
         serialParser.committRFID(data);
         return serialParser.toString();
     }
