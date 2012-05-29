@@ -1,3 +1,5 @@
+/** @file */
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -16,11 +18,11 @@ public class QueryExchangeTest {
     
     public QueryExchangeTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
-
+    
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
@@ -35,49 +37,67 @@ public class QueryExchangeTest {
 
     /**
      * Test of getAllRFIDs method, of class QueryExchange.
-     */
-    @Test
-    public void testGetAllRFIDs() throws Exception {
-        System.out.println("getAllRFIDs");
-        QueryExchange instance = new QueryExchange();
-        ResultSet expResult = null;
-        ResultSet result = instance.getAllRFIDs();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
+     *
+     * @Test public void testGetAllRFIDs() throws Exception {
+     * System.out.println("getAllRFIDs"); QueryExchange instance = new
+     * QueryExchange(); ResultSet expResult = null; ResultSet result =
+     * instance.getAllRFIDs(); assertEquals(expResult, result); // TODO review
+     * the generated test code and remove the default call to fail. fail("The
+     * test case is a prototype."); }
+     *
+     *
+     * /**
      * Test of getConfig method, of class QueryExchange.
      */
+ /*
     @Test
     public void testGetConfig() throws Exception {
         System.out.println("getConfig");
-        String RFID = "";
+        String RFID = "997711";
         QueryExchange instance = new QueryExchange();
-        ResultSet expResult = null;
+        
+        String expResult = "997711";
+        String expResult2 = "1113";
         ResultSet result = instance.getConfig(RFID);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result.next();
+        //result.next();
+        String resultString = result.getObject(1).toString();
+        String resultString2 = result.getObject(2).toString();
+        System.out.println(resultString);
+        System.out.println(expResult);
+        //System.out.println(result.getObject(1));
+        assertEquals(expResult, resultString);
+        assertEquals(expResult2, resultString2);
+
     }
+    * 
+    */
 
     /**
      * Test of newUser method, of class QueryExchange.
      */
+    
     @Test
     public void testNewUser() throws Exception {
+        
         System.out.println("newUser");
-        String newUserNumber = "";
+        String newUserNumber = "131313";
         QueryExchange instance = new QueryExchange();
         instance.newUser(newUserNumber);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ResultSet result = instance.getConfig(newUserNumber);
+        result.next();
+        String resultString = result.getObject(1).toString();
+        System.out.println(resultString);
+        System.out.println(newUserNumber);        
+        assertEquals(resultString, newUserNumber);
+        
+        instance.delUser("131313");
     }
 
     /**
      * Test of delUser method, of class QueryExchange.
      */
+    /*
     @Test
     public void testDelUser() throws Exception {
         System.out.println("delUser");
@@ -87,10 +107,13 @@ public class QueryExchangeTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    * 
+    */
 
     /**
      * Test of newConfig method, of class QueryExchange.
      */
+    /*
     @Test
     public void testNewConfig() throws Exception {
         System.out.println("newConfig");
@@ -110,4 +133,7 @@ public class QueryExchangeTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    * 
+    */
+    
 }
